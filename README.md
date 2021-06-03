@@ -6,7 +6,7 @@ Grupo en Telegram https://t.me/Pen7esting
 
 ## Smell AD
 
-Es un sencillo script que nos ayudara a encontrar informacion sobre el DC e identificar cual es el DC.
+Es un sencillo script facil de usar que nos ayudara a encontrar informacion sobre el DC e identificar cual es el DC.
 
 # Sistema Operativo
 
@@ -18,10 +18,10 @@ ParrotOS 4.11
 
 # Uso
 
-git clone https://github.com/Anonimo501/zerologon.git
+git clone https://github.com/Anonimo501/Smell_AD.git
 
-cd zerologon/
+cd Smell_AD/
 
-chmod +x zerologon.sh
+chmod +x Smell_AD
 
-./zerologon.sh
+./Smell_AD
