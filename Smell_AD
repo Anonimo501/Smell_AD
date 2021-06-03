@@ -1,0 +1,109 @@
+#!/bin/bash
+
+opcion="ninguna"
+
+
+function opcion1
+{
+
+	echo ""
+	echo "*                                                                 								  *"
+	echo "* Al analizar con Crackmapexec podremos descubrir el DC y obtener la IP con otra informacion adicional Ejemplo: 192.168.1.0/24    *"
+	echo "*                                                                 								  *"
+	echo "				+ Recuerda que el DC se distingue por que aparece asi:	(signing:True) +"
+	echo ""
+	read ipdered
+	xterm -e "crackmapexec smb $ipdered" &
+
+}
+
+function opcion2
+{
+
+	echo ""
+	echo "*                                                         *"
+	echo "* Ingrese la IP del Servidor DC Ejemplo: 192.168.1.200    *"
+	echo "*                                                         *"
+	echo ""
+	read ip
+
+	smbmap -H $ip
+	nmblookup -A $ip
+	ldapsearch -x -h $ip
+	enum4linux -a $ip
+
+	read -rsp $'Press enter to continue...\n'
+
+}
+
+function opcion3
+{
+
+	echo ""
+	echo "*                                                                 			*"
+	echo "*		Ingrese la IP del Servidor donde deseas loguearte por SMB Ejemplo: 192.168.1.100	*"
+	echo "*	Tener en cuenta para loguear por SMB se debe tener la contraseña del usuario		*"
+	echo "*                                                          			       	*"
+	echo ""
+	read ip
+
+	echo ""
+	echo "*                                                                 	*"
+	echo "*	Ingrese el nombre de la carpeta compartida Ejemplo: compartida		*"
+	echo "*	Si ingresas mal la Password el script regresara al menu principal     	*"
+	echo ""
+	read carpeta
+
+	smbclient -U Administrador //$ip/$carpeta
+
+}
+
+while [ $opcion != "9"  ]
+    do
+
+	#Banner
+
+echo ""
+echo "	  ██████  ███▄ ▄███▓▓█████  ██▓     ██▓              ▄▄▄      ▓█████▄ "
+echo "	▒██    ▒ ▓██▒▀█▀ ██▒▓█   ▀ ▓██▒    ▓██▒             ▒████▄    ▒██▀ ██▌"
+echo "	░ ▓██▄   ▓██    ▓██░▒███   ▒██░    ▒██░             ▒██  ▀█▄  ░██   █▌"
+echo "	  ▒   ██▒▒██    ▒██ ▒▓█  ▄ ▒██░    ▒██░             ░██▄▄▄▄██ ░▓█▄   ▌"
+echo "	▒██████▒▒▒██▒   ░██▒░▒████▒░██████▒░██████▒          ▓█   ▓██▒░▒████▓ "
+echo "	▒ ▒▓▒ ▒ ░░ ▒░   ░  ░░░ ▒░ ░░ ▒░▓  ░░ ▒░▓  ░          ▒▒   ▓▒█░ ▒▒▓  ▒ "
+echo "	░ ░▒  ░ ░░  ░      ░ ░ ░  ░░ ░ ▒  ░░ ░ ▒  ░           ▒   ▒▒ ░ ░ ▒  ▒ "
+echo "	░  ░  ░  ░      ░      ░     ░ ░     ░ ░              ░   ▒    ░ ░  ░ "
+echo "	      ░         ░      ░  ░    ░  ░    ░  ░               ░  ░   ░    "
+echo "	                                                               ░      "
+echo ""
+	echo -e "\nMenu"
+	echo -e "\t1) Busquemos el DC!"
+	echo -e "\t2) Busquemos un poco de info del DC!"
+        echo -e "\t3) Conectemonos por SMB!"
+	echo -e "\t9) Salir\n"
+	echo ""
+	echo "	*		Gracias por usa Smell AD		*"
+	echo ""
+	echo -e "\tOpcion: \c"
+
+read opcion
+
+        if [ -z $opcion ] ; then opcion="ninguna" ; fi
+
+        case $opcion in
+		"1" )
+                      opcion1
+  		      ;;
+		"2" )
+		      opcion2
+		      ;;
+                "3" )
+                      opcion3
+                      ;;
+		"*" )
+		      ;;
+
+	esac
+
+
+	/usr/bin/clear
+done
