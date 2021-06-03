@@ -6,7 +6,7 @@ Grupo en Telegram https://t.me/Pen7esting
 
 ## Smell AD
 
-Es un sencillo script facil de usar que nos ayudara a encontrar informacion sobre el DC e identificar cual es el DC.
+Es un sencillo script facil de usar que nos ayudara a olfatear o encontrar informacion sobre el DC e identificar cual es el DC.
 
 # Sistema Operativo
 
